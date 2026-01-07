@@ -4,7 +4,7 @@ Todas las modificaciones notables de este proyecto se documentarán en este arch
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue [Semantic Versioning](https://semver.org/lang/es/).
 
-## [0.1.0] - 2026-01-04
+## [0.0.1] - 2026-01-07
 ### Added
 - Primera versión pública del paquete.
 - Service Provider para integración automática con Laravel.
