@@ -142,6 +142,6 @@ vendor/bin/phpunit
 
 Thanks for helping improve the package. -->
 
-## Licnencia
+## Licencia
 
 MIT — consulta el fichero LICENSE para más detalle.
