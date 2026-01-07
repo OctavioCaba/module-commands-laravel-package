@@ -3,6 +3,8 @@
 namespace OctavioCaba\ModuleCommandsLaravelPackage\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 class MakeControllerCommand extends GeneratorCommand
 {
@@ -11,7 +13,7 @@ class MakeControllerCommand extends GeneratorCommand
    *
    * @var string
    */
-  protected $signature = 'make:module-controller {name} {module}';
+  protected $signature = 'make:module-controller {name} {module} {--force} {--namespace-root=}';
 
   /**
    * The console command description.
@@ -65,6 +67,58 @@ class MakeControllerCommand extends GeneratorCommand
     $stub = parent::buildClass($name);
 
     return $stub;
+  }
+
+  /**
+   * Execute the console command.
+   */
+  public function handle(): int
+  {
+    $name = $this->argument('name');
+    $module = $this->argument('module');
+
+    // Determine class name (without namespace) and target paths
+    $className = preg_replace('/.*\\\\/', '', $name);
+
+    $stubPath = $this->getStub();
+    if (!is_file($stubPath)) {
+      $this->error("Stub file not found: {$stubPath}");
+      return 1;
+    }
+
+    $stub = file_get_contents($stubPath);
+
+    // Build namespace for module controllers using provided option or configured root (default: Modules)
+    $studlyModule = Str::studly($module);
+    $namespaceRoot = $this->option('namespace-root') ?: config('module-commands.module_namespace', 'Modules');
+    $namespaceRoot = trim($namespaceRoot, '\\');
+    $classNamespace = $namespaceRoot . "\\{$studlyModule}\\Http\\Controllers";
+
+    // Replace placeholders in stub
+    $content = str_replace('$CLASS_NAMESPACE$', $classNamespace, $stub);
+    $content = str_replace('$CLASS$', $className, $content);
+
+    // Destination file under app/modules/{module}/Http/Controllers/{Class}.php
+    $destPath = app_path("modules/{$module}/Http/Controllers/{$className}.php");
+    $dir = dirname($destPath);
+    if (!is_dir($dir)) {
+      mkdir($dir, 0755, true);
+    }
+
+    // If file exists, confirm overwrite unless --force provided
+    if (file_exists($destPath) && !$this->option('force')) {
+      if (!$this->confirm("{$destPath} already exists. Overwrite?")) {
+        $this->info('Command cancelled.');
+        return 0;
+      }
+    }
+
+    // Write file
+    file_put_contents($destPath, $content);
+
+    $this->info("Created controller: {$destPath}");
+
+    return 0;
   }
 
 }

@@ -12,7 +12,8 @@ class ModuleCommandsLaravelPackageServiceProvider extends ServiceProvider
    */
   public function register(): void
   {
-    //
+    // Merge package configuration
+    $this->mergeConfigFrom(__DIR__ . '/../config/module-commands.php', 'module-commands');
   }
 
   /**
@@ -20,7 +21,12 @@ class ModuleCommandsLaravelPackageServiceProvider extends ServiceProvider
    */
   public function boot(): void
   {
+    // Publish config
     if ($this->app->runningInConsole()) {
+      $this->publishes([
+        __DIR__ . '/../config/module-commands.php' => config_path('module-commands.php'),
+      ], 'config');
+
       $this->commands([
         MakeControllerCommand::class,
       ]);
