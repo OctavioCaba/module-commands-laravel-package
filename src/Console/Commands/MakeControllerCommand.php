@@ -3,7 +3,6 @@
 namespace OctavioCaba\ModuleCommandsLaravelPackage\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class MakeControllerCommand extends GeneratorCommand
@@ -53,7 +52,7 @@ class MakeControllerCommand extends GeneratorCommand
   {
     $module = $this->argument('module');
     $name = str_replace('\\', '/', $name);
-    return app_path("modules/{$module}/Http/Controllers/{$name}.php");
+    return app_path("Modules/{$module}/Http/Controllers/{$name}.php");
   }
 
   /**
@@ -98,8 +97,8 @@ class MakeControllerCommand extends GeneratorCommand
     $content = str_replace('$CLASS_NAMESPACE$', $classNamespace, $stub);
     $content = str_replace('$CLASS$', $className, $content);
 
-    // Destination file under app/modules/{module}/Http/Controllers/{Class}.php
-    $destPath = app_path("modules/{$module}/Http/Controllers/{$className}.php");
+    // Destination file under app/Modules/{module}/Http/Controllers/{Class}.php
+    $destPath = app_path("Modules/{$module}/Http/Controllers/{$className}.php");
     $dir = dirname($destPath);
     if (!is_dir($dir)) {
       mkdir($dir, 0755, true);

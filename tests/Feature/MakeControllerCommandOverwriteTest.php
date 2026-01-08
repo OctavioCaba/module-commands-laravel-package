@@ -11,7 +11,7 @@ class MakeControllerCommandOverwriteTest extends TestCase
     $name = 'ExistingController';
     $module = 'querylog';
 
-    $dest = app_path("modules/{$module}/Http/Controllers/{$name}.php");
+    $dest = app_path("Modules/{$module}/Http/Controllers/{$name}.php");
 
     // Ensure directory exists
     $dir = dirname($dest);
@@ -37,7 +37,7 @@ class MakeControllerCommandOverwriteTest extends TestCase
     // Cleanup
     @unlink($dest);
     @rmdir($dir);
-    @rmdir(app_path("modules/{$module}"));
+    @rmdir(app_path("Modules/{$module}"));
   }
 
   public function test_force_overwrite_replaces_existing_file()

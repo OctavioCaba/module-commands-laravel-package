@@ -60,6 +60,6 @@ class MakeControllerCommandTest extends TestCase
 
     // Normalize separators for assert
     $normalized = str_replace('\\', '/', $dest);
-    $this->assertStringEndsWith('/modules/Blog/Http/Controllers/UserController.php', $normalized);
+    $this->assertStringEndsWith('/Modules/Blog/Http/Controllers/UserController.php', $normalized);
   }
 }
