@@ -11,7 +11,7 @@ class MakeControllerCommandNamespaceRootOptionTest extends TestCase
     $name = 'OptionController';
     $module = 'querylog';
 
-    $dest = app_path("modules/{$module}/Http/Controllers/{$name}.php");
+    $dest = app_path("modules/{$module}/src/Http/Controllers/{$name}.php");
 
     // Ensure clean state
     if (file_exists($dest)) {

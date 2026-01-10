@@ -11,7 +11,7 @@ class MakeControllerCommandIntegrationTest extends TestCase
     $name = 'IntegrationTestController';
     $module = 'querylog';
 
-    $dest = app_path("modules/{$module}/Http/Controllers/{$name}.php");
+    $dest = app_path("modules/{$module}/src/Http/Controllers/{$name}.php");
 
     // Ensure clean state before running
     if (file_exists($dest)) {

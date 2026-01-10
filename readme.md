@@ -1,6 +1,6 @@
 # Module Commands Laravel Package
 
-Este paquete añade comandos Artisan para crear artefactos organizados por módulos dentro de la carpeta `app/modules/`.
+Este paquete añade comandos Artisan para crear artefactos organizados por módulos dentro de la carpeta `app/Modules/`.
 
 ## Comando: make:module-controller
 
@@ -18,13 +18,13 @@ php artisan make:module-controller TestController querylog
 
 Esto creará el archivo:
 
-```
-app/modules/querylog/Http/Controllers/TestController.php
+```bash
+app/Modules/querylog/src/Http/Controllers/TestController.php
 ```
 
 El namespace dentro del archivo generado sigue la convención:
 
-```
+```bash
 Modules\{StudlyModule}\Http\Controllers
 ```
 por ejemplo, para `querylog` será `Modules\Querylog\Http\Controllers`.
@@ -58,7 +58,7 @@ El stub usado es `src/Console/Commands/stubs/controller-plain.stub` y contiene l
 
 El paquete incluye tests que verifican:
 
-- La generación en `app/modules/...` y el reemplazo del namespace y nombre de clase.
+- La generación en `app/Modules/...` y el reemplazo del namespace y nombre de clase.
 - El comportamiento de sobrescritura (confirmación negativa y `--force`).
 
 Ejecuta los tests con:
@@ -108,10 +108,10 @@ php artisan vendor:publish --provider="OctavioCaba\ModuleCommands\ModuleCommands
 ## Configuración
 
 Después de publicar, edita `config/module-commands.php` para ajustar:
-- directorio de módulos (por defecto: `modules`)
+<!-- - directorio de módulos (por defecto: `app/Modules`) -->
 - namespace raíz para las clases generadas
-- stubs por defecto y organización de archivos
-- almacenamiento para el seguimiento de módulos habilitados (`filesystem`, `config` o base de datos)
+<!-- - stubs por defecto y organización de archivos -->
+<!-- - almacenamiento para el seguimiento de módulos habilitados (`filesystem`, `config` o base de datos) -->
 
 ### Comportamiento por defecto si no hay configuración
 
@@ -182,8 +182,8 @@ php artisan module:publish {module}
 
 Contenido típico de un módulo:
 ```
-modules/
-└── Blog/
+Modules/
+└── blog/
   ├── src/
   │   ├── Http/
   │   │   ├── Controllers/

@@ -16,3 +16,8 @@ y este proyecto sigue [Semantic Versioning](https://semver.org/lang/es/).
 ### Fixed
 - Modules location moved from `modules/` to `app/Modules/`
 - Removed unused dependencies
+
+## [0.0.4] - 2026-01-09
+### Fixed
+- Generated `controllers` location moved from `app/Modules/Http/Controllers/` to `app/Modules/src/Http/Controllers/`
+- Updated `README.md` doc

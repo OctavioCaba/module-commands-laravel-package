@@ -52,7 +52,7 @@ class MakeControllerCommand extends GeneratorCommand
   {
     $module = $this->argument('module');
     $name = str_replace('\\', '/', $name);
-    return app_path("Modules/{$module}/Http/Controllers/{$name}.php");
+    return app_path("Modules/{$module}/src/Http/Controllers/{$name}.php");
   }
 
   /**
@@ -98,7 +98,7 @@ class MakeControllerCommand extends GeneratorCommand
     $content = str_replace('$CLASS$', $className, $content);
 
     // Destination file under app/Modules/{module}/Http/Controllers/{Class}.php
-    $destPath = app_path("Modules/{$module}/Http/Controllers/{$className}.php");
+    $destPath = app_path("Modules/{$module}/src/Http/Controllers/{$className}.php");
     $dir = dirname($destPath);
     if (!is_dir($dir)) {
       mkdir($dir, 0755, true);
